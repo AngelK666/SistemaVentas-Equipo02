@@ -3,5 +3,5 @@ Prototipo de Sistema de Ventas con Patrones Factory, Strategy y Adapter en Java/
 
 ## Integrantes del Equipo
 * Soto Bautista Ruiz Eduard - 27230507-Factory
-* Pacheco Quispe Michael Walter - 27172129 -Adapter
+* Pacheco Quispe Michael Walter - 27172119 -Adapter
 * Ccenhua Espinoza Angel David -27232502 - Strategy
