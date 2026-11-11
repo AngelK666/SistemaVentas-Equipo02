@@ -1,9 +1,5 @@
 package epis.unsch;
 
-import epis.unsch.adapter.AdapterPasarelaExterna;
-import epis.unsch.adapter.IPasarelaPago;
-import epis.unsch.factory.Comprobante;
-import epis.unsch.factory.ComprobanteFactory;
 import epis.unsch.strategy.CalculadoraDescuento;
 import epis.unsch.strategy.DescuentoPorcentaje;
 import epis.unsch.strategy.SinDescuento;
@@ -47,9 +43,14 @@ public class Main {
         System.out.print("Seleccione el tipo de comprobante: ");
         int tipo = scanner.nextInt();
         String tipoStr = (tipo == 2) ? "FACTURA" : "BOLETA";
-        Comprobante comprobante = ComprobanteFactory.crearComprobante(tipoStr);
+
+        System.out.print("Ingrese el monto del comprobante (S/): ");
+        double monto = scanner.nextDouble();
+
+        Comprobante comprobante = ComprobanteFactory.crearComprobante(tipoStr, "Cliente Demo");
         if (comprobante != null) {
-            comprobante.emitir();
+            System.out.println("\nTipo: " + comprobante.getTipo());
+            System.out.println(comprobante.generarDetalle(monto));
         }
     }
 
@@ -60,11 +61,11 @@ public class Main {
 
         CalculadoraDescuento calculadora = new CalculadoraDescuento();
 
-        // 1. Aplicar Sin Descuento
-        calculadora.setE扶Estrategia(new SinDescuento());
+        // 1. Sin Descuento
+        calculadora.setEstrategia(new SinDescuento());
         System.out.printf("Monto sin descuento: S/ %.2f%n", calculadora.calcular(montoBase));
 
-        // 2. Aplicar Descuento del 10%
+        // 2. Descuento 10%
         calculadora.setEstrategia(new DescuentoPorcentaje(10));
         System.out.printf("Monto con 10%% de descuento: S/ %.2f%n", calculadora.calcular(montoBase));
     }
@@ -78,6 +79,7 @@ public class Main {
         System.out.println("Iniciando el cobro de la venta a nombre de: " + cliente);
         System.out.println("Monto a cobrar: S/ " + totalVenta);
         System.out.println("----------------------------------------");
-        pasarela.procesarPago(cliente, totalVenta);
+        // Se envia primero el monto (double) y luego el cliente (String)
+        pasarela.procesarPago(totalVenta, cliente);
     }
 }
