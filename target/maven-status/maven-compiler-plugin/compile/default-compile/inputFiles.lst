@@ -1,0 +1,12 @@
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\AdapterPasarelaExterna.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\Boleta.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\Comprobante.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\ComprobanteFactory.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\Factura.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\IPasarelaPago.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\Main.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\PasarelaExternaAPI.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\strategy\CalculadoraDescuento.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\strategy\DescuentoPorcentaje.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\strategy\EstrategiaDescuento.java
+C:\Users\Angel k\SistemaVentas-Equipo02\src\main\java\epis\unsch\strategy\SinDescuento.java

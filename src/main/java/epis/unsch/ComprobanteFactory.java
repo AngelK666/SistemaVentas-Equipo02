@@ -1,15 +1,18 @@
 package epis.unsch;
 
 public class ComprobanteFactory {
-    public static Comprobante crearComprobante(String tipo, String documentoCliente) {
+    public static Comprobante crearComprobante(String tipo, String cliente) {
         if (tipo == null) return null;
-        switch (tipo.toLowerCase()) {
-            case "boleta":
-                return new Boleta(documentoCliente);
-            case "factura":
-                return new Factura(documentoCliente);
+
+        switch (tipo.toUpperCase()) {
+            case "BOLETA":
+                return new Boleta(cliente);
+            case "FACTURA":
+                return new Factura(cliente);
+            case "TICKET": // Reto de Evolución
+                return new Ticket(cliente);
             default:
-                throw new IllegalArgumentException("Tipo de comprobante no válido: " + tipo);
+                return null;
         }
     }
 }
