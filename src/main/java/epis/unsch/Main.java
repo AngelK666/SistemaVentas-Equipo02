@@ -1,5 +1,9 @@
 package epis.unsch;
 
+import epis.unsch.adapter.AdapterPasarelaExterna;
+import epis.unsch.adapter.IPasarelaPago;
+import epis.unsch.factory.Comprobante;
+import epis.unsch.factory.ComprobanteFactory;
 import epis.unsch.strategy.CalculadoraDescuento;
 import epis.unsch.strategy.DescuentoPorcentaje;
 import epis.unsch.strategy.SinDescuento;
@@ -23,9 +27,9 @@ public class Main {
             if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
                 switch (opcion) {
-                    case 1 -> System.out.println("\n[Modulo Factory: En desarrollo por Integrante 2]");
+                    case 1 -> ejecutarFactory(scanner);
                     case 2 -> ejecutarStrategy(scanner);
-                    case 3 -> System.out.println("\n[Modulo Adapter: En desarrollo por Integrante 3]");
+                    case 3 -> ejecutarAdapter();
                     case 0 -> System.out.println("\nSaliendo del sistema...");
                     default -> System.out.println("\nOpcion invalida. Intente de nuevo.");
                 }
@@ -33,6 +37,19 @@ public class Main {
                 System.out.println("\nEntrada no valida. Ingrese un numero.");
                 scanner.next();
             }
+        }
+    }
+
+    private static void ejecutarFactory(Scanner scanner) {
+        System.out.println("\n--- DEMOSTRACION PATRON FACTORY ---");
+        System.out.println("1. Emitir Boleta");
+        System.out.println("2. Emitir Factura");
+        System.out.print("Seleccione el tipo de comprobante: ");
+        int tipo = scanner.nextInt();
+        String tipoStr = (tipo == 2) ? "FACTURA" : "BOLETA";
+        Comprobante comprobante = ComprobanteFactory.crearComprobante(tipoStr);
+        if (comprobante != null) {
+            comprobante.emitir();
         }
     }
 
@@ -44,11 +61,23 @@ public class Main {
         CalculadoraDescuento calculadora = new CalculadoraDescuento();
 
         // 1. Aplicar Sin Descuento
-        calculadora.setEstrategia(new SinDescuento());
+        calculadora.setE扶Estrategia(new SinDescuento());
         System.out.printf("Monto sin descuento: S/ %.2f%n", calculadora.calcular(montoBase));
 
         // 2. Aplicar Descuento del 10%
         calculadora.setEstrategia(new DescuentoPorcentaje(10));
         System.out.printf("Monto con 10%% de descuento: S/ %.2f%n", calculadora.calcular(montoBase));
+    }
+
+    private static void ejecutarAdapter() {
+        System.out.println("\n--- DEMOSTRACION PATRON ADAPTER ---");
+        IPasarelaPago pasarela = new AdapterPasarelaExterna();
+        double totalVenta = 125.50;
+        String cliente = "Juan Perez";
+
+        System.out.println("Iniciando el cobro de la venta a nombre de: " + cliente);
+        System.out.println("Monto a cobrar: S/ " + totalVenta);
+        System.out.println("----------------------------------------");
+        pasarela.procesarPago(cliente, totalVenta);
     }
 }
